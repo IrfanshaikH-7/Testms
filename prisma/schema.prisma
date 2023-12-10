@@ -10,6 +10,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+
 model Student {
  id String @id @default(auto()) @map("_id") @db.ObjectId
  name String 
@@ -19,4 +20,35 @@ model Student {
  updatedAt DateTime @updatedAt
  
 } 
+
+model Profile {
+ id String @id @default(auto()) @map("_id") @db.ObjectId
+ userId String @unique
+ name String
+ email String
+ roletag MemberRole @default(GUEST)
+ members Member[]
+ 
+
+ createdAt DateTime @default(now())
+ updatedAt DateTime @updatedAt
+}
+
+enum MemberRole {
+  ADMIN
+  EMPLOYEE
+  GUEST
+}
+
+model Member {
+   id String @id @default(auto()) @map("_id") @db.ObjectId
+   role MemberRole @default(GUEST)
+
+   profile Profile @relation(fields: [profileId], references: [id], onDelete: Cascade)
+   profileId String @unique @db.ObjectId
+
+
+   createdAt DateTime @default(now())
+   updatedAt DateTime @updatedAt
+}
 

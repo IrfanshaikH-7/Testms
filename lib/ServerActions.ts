@@ -13,10 +13,25 @@ export const FormSubmit = async(formdata: FormData) => {
                 interest: interest || 'something'
             }
         })
-        console.log(data)
+        // console.log(data)
         return data
     } catch (error) {
         console.log(error)
         
     }
+}
+
+export const fetchGuests = async() => {
+    try {
+        const profiles = await db.profile.findMany({
+            where:{
+                roletag: 'GUEST'
+            }
+        })
+
+        // console.log(profiles)
+    } catch (error) {
+        console.log(error)
+    }
+    
 }

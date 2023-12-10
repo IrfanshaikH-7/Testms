@@ -20,15 +20,20 @@ import {
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { useEffect } from "react"
+import ProfileButton from "@/components/ProfileButton"
+import { Profile } from "@prisma/client"
 
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[]
     data: TData[]
+    employees: Profile[]
 }
 
 export function DataTable<TData, TValue>({
     columns,
     data,
+    employees
+
 }: DataTableProps<TData, TValue>) {
     const table = useReactTable({
         data,
@@ -36,6 +41,8 @@ export function DataTable<TData, TValue>({
         getCoreRowModel: getCoreRowModel(),
         getPaginationRowModel: getPaginationRowModel()
     })
+
+    // console.log('employees',employees)
     const router = useRouter()
 
     useEffect(() => {
@@ -43,9 +50,15 @@ export function DataTable<TData, TValue>({
     },[])
     return (
         <section className="h-screen w-full flex flex-col justify-end items-end px-12 gap-1">
-            <Link href='/register' className="self-start p-4 border rounded-md hover:bg-neutral-800">
+            <div className="flex justify-between items-center w-full ">
+              <Link href='/register' className="self-start p-4 border rounded-md hover:bg-neutral-800">
                 register new Student
-            </Link>
+            </Link>  
+            <div className="border">
+                <ProfileButton />
+            </div>
+            </div>
+            
             <div className="rounded-md border h-4/6 w-full overflow-y-scroll no-scrollbar">
                 <Table >
                     <TableHeader>

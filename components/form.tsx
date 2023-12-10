@@ -19,7 +19,7 @@ const Form = () => {
     const data = new FormData(form);
 
     const res = await FormSubmit(data);
-    console.log({ res });
+    // console.log({ res });
     if (res) {
       router.push('/thankyou')
     }

@@ -1,8 +1,4 @@
 'use client'
-import { Button } from "@/components/ui/button";
-import { Profile, Student } from "@prisma/client";
-import { ColumnDef} from "@tanstack/react-table";
-
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -12,40 +8,24 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { MoreHorizontal } from "lucide-react";
+import { useEffect, useState } from "react";
+import { fetchGuests } from "@/lib/ServerActions";
+import { Button } from "./ui/button";
+interface DropProps {
+    id: string,
+    name: string
+}
 
-
-
-
-export const columns: ColumnDef<Student>[] = [
-    {
-        header: 'Student ID',
-        accessorKey: "id"
-    },
-    {
-        header: 'Name',
-        accessorKey: 'name'
-    },
-    {
-        header: 'Interests',
-        accessorKey: 'interest'
-    },
-    {
-        id: 'action',
-        cell: ({ row }) => {
-            const person = row.original;
-            const name = person.name
-            const id = person.id
-        
-            return (
-
-                <DropdownMenu>
+const DropdownComponent = ({id, name}: DropProps) => {
+  return (
+    <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                         <Button variant='ghost' className="w-8 h-8 p-0">
                             <MoreHorizontal />
                         </Button>
                     </DropdownMenuTrigger>
                     {
-
+                        
                     }
                     <DropdownMenuContent>
                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
@@ -57,11 +37,11 @@ export const columns: ColumnDef<Student>[] = [
                         <DropdownMenuItem onClick={() => {
                             navigator.clipboard.writeText(id)
                         }}>
-                            
+                            Copy Student ID
                         </DropdownMenuItem>
                     </DropdownMenuContent>
                 </DropdownMenu>
-            )
-        }
-    }
-]
+  )
+}
+
+export default DropdownComponent
