@@ -43,10 +43,10 @@ export function DataTable<TData, TValue>({
     },[])
     return (
         <section className="h-screen w-full flex flex-col justify-end items-end px-12 gap-1">
-            <Link href='/' className="self-start p-4 border rounded-md hover:bg-neutral-800">
+            <Link href='/register' className="self-start p-4 border rounded-md hover:bg-neutral-800">
                 register new Student
             </Link>
-            <div className="rounded-md border h-4/6 w-full overflow-y-scroll">
+            <div className="rounded-md border h-4/6 w-full overflow-y-scroll no-scrollbar">
                 <Table >
                     <TableHeader>
                         {table.getHeaderGroups().map((headerGroup) => (
