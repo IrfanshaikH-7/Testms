@@ -3,12 +3,16 @@
 import { FormSubmit } from "@/lib/ServerActions"
 import { Button } from "./ui/button"
 import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { Loader2 } from "lucide-react";
 
 
 const Form = () => {
   const router = useRouter();
+  const [loading, setLoading] = useState(false)
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    setLoading(true);
     e.preventDefault();
 
     const form = e.currentTarget;
@@ -42,7 +46,7 @@ const Form = () => {
 
 
         <Button size='sm' variant='outline' className="w-full" type="submit">
-          submit
+          {loading ? <Loader2 className="h-4 w-4 text-white animate-spin"/> : "Register"}
         </Button>
       </form>
 

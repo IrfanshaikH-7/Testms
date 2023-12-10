@@ -37,7 +37,7 @@ export function DataTable<TData, TValue>({
         getPaginationRowModel: getPaginationRowModel()
     })
     const router = useRouter()
-    
+
     useEffect(() => {
         router.refresh()
     },[])
