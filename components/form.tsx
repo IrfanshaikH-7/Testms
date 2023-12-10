@@ -4,15 +4,6 @@ import { FormSubmit } from "@/lib/ServerActions"
 import { Button } from "./ui/button"
 import { useRouter } from "next/navigation";
 
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
-import { revalidatePath } from "next/cache";
-
 
 const Form = () => {
   const router = useRouter();
@@ -34,7 +25,7 @@ const Form = () => {
     <div className="h-full w-full flex justify-center items-center">
 
       <form onSubmit={handleSubmit} className='w-full max-w-2xl h-4/6 border-2 rounded-md shadow-sm  shadow-black dark:shadow-neutral-500 space-y-3 p-4'>
-        <input type="text" name='name' id='name' placeholder='Enter your name'
+        <input type="text" name='name' id='name' placeholder='Enter your name' required
           className="w-full p-2 text-black dark:text-neutral-200 rounded-md bg-neutral-800 text-sm"
         />
       <div  className="p-2 w-full text-start rounded-md bg-neutral-800 text-neutral-200" >
