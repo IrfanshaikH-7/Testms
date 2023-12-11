@@ -22,6 +22,7 @@ import Link from "next/link"
 import { useEffect } from "react"
 import ProfileButton from "@/components/ProfileButton"
 import { Profile } from "@prisma/client"
+import { useModel } from "@/hooks/emp-store"
 
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[]
@@ -41,8 +42,10 @@ export function DataTable<TData, TValue>({
         getCoreRowModel: getCoreRowModel(),
         getPaginationRowModel: getPaginationRowModel()
     })
-
-    // console.log('employees',employees)
+    console.log(employees)
+    const updateEmps = useModel((state:any) => state.updateEmps)
+    updateEmps(employees)
+    
     const router = useRouter()
 
     useEffect(() => {

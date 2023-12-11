@@ -18,7 +18,8 @@ const page = async () => {
       }
     })
 
-
+    
+    
     return (
       studentsData && (
         <div>
