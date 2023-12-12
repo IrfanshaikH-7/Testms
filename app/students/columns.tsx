@@ -1,7 +1,7 @@
 'use client'
 import { Button } from "@/components/ui/button";
 import { Profile, Student } from "@prisma/client";
-import { ColumnDef} from "@tanstack/react-table";
+import { ColumnDef } from "@tanstack/react-table";
 
 import {
     DropdownMenu,
@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { MoreHorizontal } from "lucide-react";
 import { useModel } from "@/hooks/emp-store";
+import { profile } from "console";
 
 
 
@@ -30,17 +31,24 @@ export const columns: ColumnDef<Student>[] = [
         header: 'Interests',
         accessorKey: 'interest'
     },
+
     {
         id: 'action',
         cell: ({ row }) => {
             const person = row.original;
             const name = person.name
             const id = person.id
-            const { profiles } = useModel();
-            // const profile = profiles.find(profiles => profiles.roletag == "GUEST")
-            const profile = profiles
-            console.log(profile)
-            
+            const getProfile = () => {
+                const { profiles } = useModel();
+                // const profile = profiles.find(profiles => profiles.roletag == "GUEST")
+                const profile = profiles
+                
+                return profile
+            }
+            const GotProfile = getProfile()
+            console.log("profilesss", {GotProfile})
+
+
             return (
 
                 <DropdownMenu>
@@ -55,22 +63,22 @@ export const columns: ColumnDef<Student>[] = [
                     <DropdownMenuContent>
                         <DropdownMenuLabel>Actions</DropdownMenuLabel>
                         {
-                            profile.map((emp) => (
+                            GotProfile.map((emp) => (
                                 <DropdownMenuItem
-                                id={emp.id}
-                                onClick={() => {
-                                    navigator.clipboard.writeText(emp.name)
-                                    console.log({
-                                        name: emp.name,
-                                        student: name
-                                    })
-                                }} >
+                                    id={emp.id}
+                                    onClick={() => {
+                                        navigator.clipboard.writeText(emp.name)
+                                        console.log({
+                                            name: emp.name,
+                                            student: name
+                                        })
+                                    }} >
                                     {emp.name}
                                 </DropdownMenuItem>
                             ))
                         }
-                        
-                        
+
+
                         <DropdownMenuItem onClick={() => {
                             navigator.clipboard.writeText(name)
                         }}>
@@ -79,7 +87,7 @@ export const columns: ColumnDef<Student>[] = [
                         <DropdownMenuItem onClick={() => {
                             navigator.clipboard.writeText(id)
                         }}>
-                            
+
                         </DropdownMenuItem>
                     </DropdownMenuContent>
                 </DropdownMenu>
